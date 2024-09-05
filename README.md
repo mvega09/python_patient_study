@@ -31,4 +31,3 @@ Create file *requirements.txt*
     deactivate
     rm -rf venv
 ```
-## prueba mmm
