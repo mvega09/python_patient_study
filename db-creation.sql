@@ -1,26 +1,27 @@
 -- Script para crear la base de datos y las tablas necesarias
 
-CREATE DATABASE IF NOT EXISTS college_manager;
+CREATE DATABASE IF NOT EXISTS patient_db;
 
-USE college_manager;
+USE patient_db;
 
 -- Tabla para almacenar la información del curso
-CREATE TABLE IF NOT EXISTS courses (
+CREATE TABLE IF NOT EXISTS studies (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(255) NOT NULL,
-    start_date DATE NOT NULL,
-    end_date DATE NOT NULL,
-    cut1_percentage FLOAT NOT NULL,
-    cut2_percentage FLOAT NOT NULL,
-    cut3_percentage FLOAT NOT NULL
+    modality VARCHAR(10) NOT NULL,
+    study VARCHAR(100) NOT NULL,
+    study_carried_out DATE NOT NULL,
+    price DECIMAL(10, 2) NOT NULL
 );
 
+
 -- Tabla para almacenar la lista de estudiantes
-CREATE TABLE IF NOT EXISTS students (
+CREATE TABLE IF NOT EXISTS patients (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    code VARCHAR(255) NOT NULL,
-    full_name VARCHAR(255) NOT NULL,
-    emails VARCHAR(255) NOT NULL,
-    course_id INT,
-    FOREIGN KEY (course_id) REFERENCES courses(id) ON DELETE CASCADE
-); 
+    docuemnt_type VARCHAR(20) NOT NULL,
+    document VARCHAR(50) NOT NULL UNIQUE,
+    full_name VARCHAR(100) NOT NULL,
+    patient_sex ENUM('M', 'F') NOT NULL,
+    birthday DATE NOT NULL,
+    phone_number VARCHAR(15),
+    email VARCHAR(100) NOT NULL
+);

@@ -7,4 +7,3 @@ mysql-connector-python
 
 streamlit
 watchdog
-openpyxl
