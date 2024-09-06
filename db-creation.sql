@@ -19,7 +19,7 @@ CREATE TABLE IF NOT EXISTS patients (
     id INT AUTO_INCREMENT PRIMARY KEY,
     full_name VARCHAR(100) NOT NULL,
     document VARCHAR(50) NOT NULL UNIQUE,
-    docuemnt_type VARCHAR(20) NOT NULL,
+    document_type VARCHAR(20) NOT NULL,
     birthdate DATE NOT NULL,
     patient_sex ENUM('M', 'F') NOT NULL,
     phone_number VARCHAR(15),
