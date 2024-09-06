@@ -4,17 +4,18 @@ import mysql.connector
 from mysql.connector import Error
 
 
-st.title("Create course")
-name = st.text_input('Course name')
-start_date = st.date_input(label="Start date")
-end_date = st.date_input(label="End date")
-cut1_percentage = st.number_input(label="Cut 1 percentage")
-cut2_percentage = st.number_input(label="Cut 2 percentage")
-cut3_percentage = st.number_input(label="Cut 3 percentage")
+st.title("Crear Paciente")
+full_name = st.text_input('Nombre paciente')
+document_type = st.selectbox("Tipo de documento", ["CC", "CE", "TI", "PA", "RC"])
+document = st.text_input(label="Documento")
+birthdate = st.date_input(label="Fecha de nacimiento")
+patient_sex = st.selectbox(label="Sexo", options=["Masculino", "Femenino", "Otro"])
+phone_number = st.text_input(label="Numero de celular")
+email = st.text_input("Correo electronico")
 submit = st.button("Submit")
 
 if submit:
-    st.write(f"Course name is: {name}")
+    st.write(f"Nombre paciente es: {full_name}")
     st.write(f"database name: {os.getenv('DB_NAME')}")
     try:
         connection = mysql.connector.connect(
@@ -27,17 +28,18 @@ if submit:
             cursor = connection.cursor(dictionary=True)
 
             query = """
-            INSERT INTO courses (name, start_date, end_date, cut1_percentage, cut2_percentage, cut3_percentage)
-            VALUES (%s, %s, %s, %s, %s, %s)
+            INSERT INTO patients (full_name, document_type, document, birthdate, patient_sex, phone_number, email)
+            VALUES (%s, %s, %s, %s, %s, %s, %s)
             """
 
             values = (
-                name,
-                start_date,
-                end_date,
-                cut1_percentage,
-                cut2_percentage,
-                cut3_percentage
+                full_name,
+                document_type,
+                document,
+                birthdate,
+                patient_sex,
+                phone_number,
+                email
             )
 
             cursor.execute(query, values)
@@ -45,7 +47,7 @@ if submit:
 
             cursor.close()
 
-            st.write("The course has been successfully saved")
+            st.write("El paciente se ha creado con exito")
 
     except Error as e:
         st.error("Error connecting to database")
