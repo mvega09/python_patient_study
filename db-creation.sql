@@ -25,3 +25,18 @@ CREATE TABLE IF NOT EXISTS patients (
     phone_number NUMBER(15),
     email VARCHAR(100) NOT NULL
 );
+
+CREATE TABLE IF NOT EXISTS patient_study_combined (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    full_name VARCHAR(255),
+    document_type VARCHAR(50),
+    document VARCHAR(50),
+    birthdate DATE,
+    patient_sex VARCHAR(10),
+    phone_number VARCHAR(20),
+    email VARCHAR(100),
+    modality VARCHAR(50),
+    study VARCHAR(100),
+    study_carried_out DATE,
+    price DECIMAL(10, 2)
+);
