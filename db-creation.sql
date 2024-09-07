@@ -22,7 +22,7 @@ CREATE TABLE IF NOT EXISTS patients (
     document_type VARCHAR(20) NOT NULL,
     birthdate DATE NOT NULL,
     patient_sex ENUM('M', 'F') NOT NULL,
-    phone_number NUMBER(15),
+    phone_number VARCHAR(15),
     email VARCHAR(100) NOT NULL
 );
 
