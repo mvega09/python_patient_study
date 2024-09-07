@@ -25,6 +25,8 @@ def process_and_combine_excel_files(excel_files):
                     'celular_paciente': 'phone_number',
                     'email': 'email'
                 })
+                df['birthdate'] = pd.to_datetime(df['birthdate'], errors='coerce').dt.strftime('%Y-%m-%d')
+                
                 patient_df = pd.concat([patient_df, df[['full_name', 'document_type', 'document', 'birthdate', 'patient_sex', 'phone_number', 'email']]], ignore_index=True)
 
             elif 'modalidad' in df.columns:
@@ -35,7 +37,7 @@ def process_and_combine_excel_files(excel_files):
                     'valor': 'price',
                     'documento_paciente': 'document'
                 })
-                
+
                 df['study_carried_out'] = pd.to_datetime(df['study_carried_out'], errors='coerce').dt.strftime('%Y-%m-%d')
                 
                 study_df = pd.concat([study_df, df[['modality', 'study', 'study_carried_out', 'price', 'document']]], ignore_index=True)
@@ -118,6 +120,6 @@ if uploaded_files:
             st.write("Datos combinados de pacientes y estudios:")
             st.dataframe(combined_df)
             if st.button('Guardar datos combinados en la base de datos'):
-                insert_data_to_db('patient_study_combined', combined_df)
+                insert_data_to_db('patient_study_combined', combined_df, ['full_name', 'document_type', 'document', 'birthdate', 'patient_sex', 'phone_number', 'email', 'modality', 'study', 'study_carried_out', 'price'])
         else:
             st.write("No se pudo combinar los datos debido a la falta de datos en uno de los archivos.")
